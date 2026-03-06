@@ -1,0 +1,26 @@
+# .github/workflows/echo-input.yml
+name: 字符串回显
+
+on:
+  workflow_dispatch:
+    inputs:
+      user_string:
+        description: '请输入你想回显的字符串'
+        required: true
+        type: string
+        default: 'Hello, GitHub!'
+
+jobs:
+  echo-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 显示输入的字符串
+        run: |
+          echo "🎯 你输入的字符串是："
+          echo "----------------------------------------"
+          echo "${{ github.event.inputs.user_string }}"
+          echo "----------------------------------------"
+      
+      - name: 也可以这样显示（带颜色）
+        run: |
+          echo "::notice::你输入的是：${{ github.event.inputs.user_string }}"
